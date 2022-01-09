@@ -1,0 +1,27 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 0 | Exercise 1 (a)
+*Shunt Clipper DC analysis with original polarities
+*Including Diode model file
+.include Diode_1N914.txt
+R1 1 2 1k
+*Specifying a default diode p n
+D1 3 2 1N914
+*Independent DC source of 2V
+Vdc 0  3 dc 2
+*Independent DC source whose voltage is to be varied
+Vin 1 0 sin(0 10v 1k 0 0)
+*Transient Analysis
+.tran 0.02ms 10ms
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+*Vin vs Vout plot
+plot V(2) vs V(1)
+*Vin and Vout plot
+plot V(2) V(1)
+.endc
+.end

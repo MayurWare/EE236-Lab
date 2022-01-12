@@ -1,0 +1,2 @@
+plot dc1.I(Vd) vs dc1.V(2)-dc1.V(3) dc2.I(Vbl) vs dc2.V(2)-dc2.V(3) dc3.I(Vgn) vs dc3.V(2)-dc3.V(3) dc4.I(Vrd) vs dc4.V(2)-dc4.V(3) dc5.I(Vwt) vs dc5.V(2)-dc5.V(3)
+plot log(dc1.I(Vd)) vs dc1.V(2)-dc1.V(3) log(dc2.I(Vbl)) vs dc2.V(2)-dc2.V(3) log(dc3.I(Vgn)) vs dc3.V(2)-dc3.V(3) log(dc4.I(Vrd)) vs dc4.V(2)-dc4.V(3) log(dc5.I(Vwt)) vs dc5.V(2)-dc5.V(3)

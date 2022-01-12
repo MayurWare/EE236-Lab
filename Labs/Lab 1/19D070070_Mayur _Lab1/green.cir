@@ -1,0 +1,29 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 1
+*Green Diode LED Analysis
+*Including Green Diode LED model file
+.include green_5mm.txt
+*Resistors 
+R1 In 1 100
+R2 1 0 1k
+R3 3 0 100
+*Diode 
+D1 2 3 GREEN
+*Battery
+Vin In 0 dc 0.01
+Vgn 1 2 dc 0
+*DC Analysis
+.dc Vin 0.01 5 0.01
+
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+*Id vs Vd plot
+let V = V(2) - V(3)
+*plot I(Vgn) vs V
+.endc
+.end

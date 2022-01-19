@@ -1,0 +1,33 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 2
+*Voltage Doubler
+*Including 1N914 Diode model file
+.include Diode_1N914.txt
+
+*Input Voltage
+Vin In GND sin(0 10 1k 0 0)
+*Capacitors 
+C1 1 In 10u
+C2 Out GND 10u
+*Diodes
+D1 GND 1 1N914
+D2 1 Out 1N914
+*Resistor 
+R Out GND 4.7k
+
+*Transient Analysis
+.tran 10u 10m
+
+*Control Commands
+.control
+run 
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+plot V(1) - V(In)
+plot V(Out) - V(1)
+plot V(Out)
+.endc
+.end

@@ -1,0 +1,28 @@
+Mayur Ware | 19D070070
+*EE236 | lab 2
+*Writing Netlist fpr given Transfer Characteristics - 2
+*Including 1N914 Diode model file
+.include Diode_1N914.txt
+
+*Netlist
+Vin In GND dc 2
+V1 1 GND dc 4.8
+V2 GND 2 dc 4
+R1 In Out 1k
+D1 Out 1 1N914
+D2 2 Out 1N914
+
+*DC Analysis
+.dc Vin -6 6 0.1
+
+*Control Commands
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+plot V(Out) vs V(In)
+.endc
+.end

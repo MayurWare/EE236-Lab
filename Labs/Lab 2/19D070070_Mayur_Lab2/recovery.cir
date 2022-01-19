@@ -1,0 +1,30 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 2
+*Reverse Recovery time for Zener and Schottky Diodes
+*Including both Diode model files
+.include schottky_BAT85.txt
+.include schottky_BAT960.txt
+.include Diode_1N914.txt
+
+*Netlist
+Vin In GND PULSE(-2 2 0 0 0 5us 10us)
+R1 In 1 1k
+*X1 1 2 BAT85
+*X1 1 2 BAT960
+D1 1 2 1N914
+V1 2 0 dc 0
+
+*Transient Analysis
+.tran 0.1u 10u
+
+*Control Commands
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+plot I(V1) 
+.endc
+.end

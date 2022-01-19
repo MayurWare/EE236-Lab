@@ -1,0 +1,29 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 2
+*Bridge Rectifier using BAT960 Schottky Diode
+*Including BAT85 Schottky Diode model file
+.include schottky_BAT960.txt
+*Bridge Rectifier
+X1 1 2 BAT960
+X2 0 1 BAT960
+X3 3 2 BAT960
+X4 0 3 BAT960
+*Load Resistor
+R1 2 0 1k
+*Input Voltages
+Vin 1 3 sin(0 12 50 0 0)
+*Transient Analysis
+.tran 10u 100m
+*Control Commands
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+let V_input = V(1) - V(3)
+plot V(2) V_input
+plot V(2) vs V_input
+.endc
+.end

@@ -1,0 +1,38 @@
+Mayur Ware | 19D070070
+*EE236 | Quiz 1
+*Including model files
+.include OpAmp_UA741.txt
+.include Diode_1N914.txt
+
+*Voltages
+Vin 0 1 sin(0 1 1k 0 0)
+Va GND1 a dc 15
+Vb b GND2 dc 15
+Vc GND3 c dc 15
+Vd d GND4 dc 15
+
+*Netlist
+X1 0 2 a b 3 ua741
+X2 0 5 c d Out ua741
+R1 1 2 1k
+R2 2 4 1k
+R3 1 5 2k
+R4 4 5 1k
+R5 5 Out 2k
+D1 3 2 1N914
+D2 4 3 1N914
+
+*Transient Analysis
+.tran 1u 10m
+*Control Commands
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+plot V(Out)
+plot V(Out) vs V(1)
+.endc
+.end

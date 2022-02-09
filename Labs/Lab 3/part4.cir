@@ -1,0 +1,49 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 3
+*Including Model files
+.include TL071.cir
+.include Solar_Cell.txt
+
+*Netlist
+R1 1 3 10k
+R2 2 3 1k
+Rf 3 4 1k
+Rfb 5 Out 10k
+Cfb 5 Out 4.7n
+X1 0 3 a b 4 TL071
+X2 0 5 c d Out TL071
+X3 4 5 solar_cell IL_val = 0e-3
+
+*Voltages 
+Vdc 0 2 dc 0.01
+Vsin 0 1 sin(0 1 1k 0 0)
+Va 0 a dc 15
+Vb 0 b dc -15
+Vc 0 c dc 15
+Vd 0 d dc -15
+
+*DC Analysis
+.dc Vdc 0 2 0.01
+*Control Commands
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+
+let Cfb = 4.7n
+let Rfb = 10k
+let alpha = sqrt(1 + (1/(2*3.14*1000*Rfb*Cfb)^2))
+let Cdut = abs(((V(Out))*Cfb*alpha)/(V(4)))
+plot Cdut vs V(2)
+
+*let ep = 8.85e-12*11.68
+*let q = 1.6e-19
+*let A = 16e-4
+*let C = Cdut/A
+*let y = C^(-2)
+*plot y vs V(4)
+.endc
+.end

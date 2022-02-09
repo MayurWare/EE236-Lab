@@ -1,0 +1,39 @@
+diode characterstics
+.include Solar_Cell.txt
+.include TL071.cir
+
+x1 0 2 7 8 4 TL071
+x2 0 5 9 10 6 TL071
+
+x3 4 5 solar_cell IL_val = 0
+
+vdc 1 0 dc 2
+Vin 3 0 sin(0 1 1k 0 0 0)
+R1 3 2 10k
+R2 1 2 1k
+Rf 2 4 1k
+Rfb 5 6 10k
+cfb 5 6 4.7n
+
+Vccp1 7 0 dc 15
+Vccn1 8 0 dc -15
+
+vccp2 9 0 dc 15
+vccn2 10 0 dc -15
+
+.control
+dc vdc 0 2 0.01 
+run
+
+let cfb = 4.7e-9 
+let rfb =10k
+let w = 6.28k
+let cdut =  (v(6)*cfb*sqrt(1+1/(w*cfb*rfb)^2))/v(5,4)
+plot cdut vs v(1)
+
+*let A = 16e-4
+*let C = cdut/A
+plot (cdut*625)^(-2) vs v(5)-v(4)
+
+
+.endc

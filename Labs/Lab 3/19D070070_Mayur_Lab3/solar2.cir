@@ -1,0 +1,25 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 3
+*I-V Characteristics of Solar Cell
+*Including Solar cell model file
+.include Solar_Cell.txt
+
+*Netlist 
+Vin In GND dc 0.01
+Vx 1 2 dc 0
+R1 In 1 100
+X1 2 GND solar_cell IL_val=8e-3
+
+*DC Analysis
+.dc Vin -2 2 0.01
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+*Id vs Vd plot
+plot I(Vx) vs V(2)
+.endc
+.end

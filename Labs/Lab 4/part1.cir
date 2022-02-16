@@ -1,0 +1,29 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 4
+*I-V Characteristics of Solar Cell
+*Including Solar cell model file
+.include Solar_Cell.txt
+
+*Netlist 
+Vin In GND dc 0.01    ;Input
+Vx 1 2 dc 0           ;Dummy voltage source
+R1 In 1 100           ;Resistor
+X1 2 GND solar_cell IL_val=0e-3   ;IL = 0A
+*.temp 35             ;Temperature
+*.temp 45              ;Temperature
+*.temp 55             ;Temperature
+*.temp 65             ;Temperature
+.temp 75             ;Temperature
+
+*DC Analysis
+.dc Vin -2 2 0.01
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+plot I(Vx) vs V(2)   ;Id vs Vd plot
+.endc
+.en

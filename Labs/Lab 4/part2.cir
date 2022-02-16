@@ -1,0 +1,30 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 4
+*Lighted I-V Characteristics
+*Including Solar cell model file
+.include Solar_Cell.txt
+
+*Netlist 
+Vx 1 2 dc 0
+R1 0 1 100
+X1 2 0 solar_cell IL_val=8e-3
+*.temp 35             ;Temperature
+*.temp 45              ;Temperature
+*.temp 55             ;Temperature
+*.temp 65             ;Temperature
+.temp 75             ;Temperature
+
+*DC Analysis
+.dc R1 1 500 0.01
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+plot I(Vx) vs V(2)
+plot V(1)*I(Vx) vs V(2)
+.endc
+.end
+

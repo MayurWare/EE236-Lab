@@ -1,0 +1,30 @@
+Mayur Ware | 19D070070
+*EE236 | Midsem
+*RF Switch
+*Including PIN Diode model file
+.include rn142s.txt
+*Resistors 
+R1 2 0 500E
+R2 3 5 500E
+R3 4 6 50E
+C1 1 2 100n
+C2 3 4 100n
+*Diode 
+D1 a 2 DRN142S
+*Battery
+Vin 1 0 sin(0 6 1M 0 0)
+Vrd 5 0 dc 5
+Va 3 a dc 0
+Vo 6 0 dc 0
+*Transient Analysis
+.tran 1u 6u
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+plot I(Va), V(4), I(Vo) 
+.endc
+.end

@@ -2,7 +2,7 @@ Mayur Ware | 19D070070
 *EE236 | Lab 2
 *Voltage Regulator using Zener Diode
 *Including BJT, Zener and Opamp model files
-.include zener.txt
+.include BZT52C18S.txt
 .include bc547.txt
 .include ua741.txt
 *---------------------------------------
@@ -20,12 +20,12 @@ RL 2 0 1k
 *Capacitor 
 C1 2 0 1000u
 *-----------------------------------------
-Rs 2 a 52.64
+Rs 2 a 250k
 Q1 2 c Out bc547a
 X1 a b 2 0 c ua741
-R1 Out b 6k
-R2 b 0 10k
-X2 0 a DI_1N4734A 
+R1 Out b 1k
+R2 b 0 7k
+X2 0 a DI_BZT52C18S 
 
 *Transient Analysis
 .tran 10u 100m

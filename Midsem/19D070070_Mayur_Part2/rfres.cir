@@ -1,0 +1,27 @@
+Mayur Ware | 19D070070
+*EE236 | Midsem
+*RF Resistance
+*Including PIN Diode model file
+.include rn142s.txt
+*Resistors 
+R1 Out 0 1k
+
+*Diode 
+D1 2 Out DNR142S
+*Battery
+Vsin In 0 PULSE(0 0.5 1M 0 0)
+Vdc 1 In dc 0
+*Transient Analysis
+.tran 1u 6u
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+let a = I(Vdc)
+let b = V(Out) - V(2)
+print b/a 
+.endc
+.end

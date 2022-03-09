@@ -1,0 +1,30 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 5
+*Id-Vgs Characteristics of PMOS
+.include pmos.txt               ;Including PMOS model file
+
+*Netlist
+M1 D G GND B ALD1107          ;Defining the PMOS Model Drain, Gate, Source, Body
+Vd D GND dc -200m
+Vg G GND dc 0
+*Vb B GND dc 0
+*Vb B GND dc 1
+*Vb B GND dc 2
+*Vb B GND dc 3
+Vb B GND dc 4
+
+*DC Analysis
+.dc Vg -5 0 0.01 
+.control
+run
+set color0 = white
+set color1 = black
+*set color2 = red 
+*set color2 = blue
+*set color2 = yellow
+*set color2 = green
+set color2 = violet
+set xbrushwidth = 2 
+*plot I(Vd) vs V(G)             ;Id vs Vgs plot
+.endc
+.end

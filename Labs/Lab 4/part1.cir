@@ -26,4 +26,4 @@ set color3 = red
 set xbrushwidth = 2
 plot I(Vx) vs V(2)   ;Id vs Vd plot
 .endc
-.en
+.end

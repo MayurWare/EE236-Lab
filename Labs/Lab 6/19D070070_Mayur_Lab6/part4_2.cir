@@ -1,0 +1,32 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 6
+*CMOS Inverter
+.include CMOS.txt                   ;Including CMOS model file
+
+*Netlist
+M1 1 In Out 1 cmosp L=0.4u W=30u AS=24p PS=61.6u AD=24p PD=61.6u
+*M1 1 In Out 1 cmosp L=0.4u W=60u AS=48p PS=121.6u AD=48p PD=121.6u
+*Defining the NMOS Model Drain, Gate, Source, Body
+*M2 Out In GND GND cmosn L=0.4u W=60u AS=48p PS=121.6u AD=48p PD=121.6u
+M2 Out In GND GND cmosn L=0.4u W=30u AS=24p PS=61.6u AD=24p PD=61.6u
+*Defining the PMOS Model Drain, Gate, Source, Body
+C1 Out GND 0.05p
+Vdd 1 GND dc 3
+Vin In GND pulse(0 3 0 20p 20p 4n 8n)
+
+*Transient Analysis
+.tran 0.1n 10n
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue ;1 Wp = 60 Wn = 30
+*set color2 = red ;2 Wp = 60 Wn = 60
+*set color2 = black ;3 Wp = 30 Wn = 60
+set color3 = violet
+set xbrushwidth = 2 
+plot V(Out) V(In)             ;Vout and Vin plots
+*plot dc1.V(Out) vs dc1.V(In) dc2.V(Out) vs dc2.V(In) dc3.V(out) vs dc3.V(In)
+.endc
+.end
+

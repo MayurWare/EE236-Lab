@@ -1,0 +1,34 @@
+Mayur Ware | 19D070070
+*EE236 | Quiz 2 | Part2
+*Including model files
+.include PMOS_NMOS.txt
+
+*Netlist
+M1 1 In Out Bp cmosp L=0.4u W=2.869u 
+*Defining the NMOS Model Drain, Gate, Source, Body
+M2 Out In GND Bn cmosn L=0.4u W=1.2u 
+*Defining the PMOS Model Drain, Gate, Source, Body
+C1 Out A 200f
+Vo A Out dc 0
+Vdd 1 GND dc 3.3
+Vin In GND pulse(0 3.3 0 500p 500p 4500p 10n)
+Vbp Bp GND dc 4.3
+Vbn Bn GND dc -1
+
+*Transient Analysis
+.tran 0.1n 20n
+*Control Commands
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+*plot V(Out) V(In)
+meas tran rise trig v(Out) val=0.33 rise=1 targ v(out) val=2.97 rise=1
+meas tran delay trig v(In) val=1.665 rise=2 targ v(out) val=1.665 fall=2
+meas tran fall trig v(Out) val=2.97 fall=1 targ v(out) val=0.33 fall=1
+plot I(Vo)
+.endc
+.end

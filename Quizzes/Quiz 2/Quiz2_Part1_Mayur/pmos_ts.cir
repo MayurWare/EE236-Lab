@@ -1,0 +1,27 @@
+Mayur Ware | 19D070070
+*EE236 | Quiz 2 | Part1
+*Including model files
+.include PMOS_NMOS.txt
+
+*Netlist
+M1 D G S S cmosp W=4u L=0.4u
+Vin S GND dc 0
+Vg G GND dc -3.3
+Vd D Out dc 0
+Rl Out GND 10k
+
+*DC Analysis
+.dc Vin -3.3 3.3 0.01
+*Control Commands
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+plot V(Out) vs V(S)
+let Ron = (V(Out)-V(S))/I(Vd)
+plot -Ron vs V(S)
+.endc
+.end

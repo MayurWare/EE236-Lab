@@ -1,0 +1,25 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 8
+*Switching Behavior
+.include BC547.txt               ;Including BJT model file
+.include 2N3904.txt
+*Netlist
+*Q1 C B GND bc547a             ;Defining the BJT Model Collector, Base, Emitter
+Q1 C B GND 2n3904c
+Vin In 0 PULSE(0 5 0 0 0 5u 10u)
+Rb In B 1k 
+Rc 2 C 1k
+V_dd 2 0 5
+
+*Transient Analysis
+.tran 1u 5u
+
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set xbrushwidth = 2 
+plot V(C) V(In)
+.endc
+.end

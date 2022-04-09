@@ -1,0 +1,28 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 8
+*BJT Small Signal Model
+.include BC547.txt               ;Including BJT model file
+
+*Netlist
+Q1 C B GND bc547a             ;Defining the BJT Model Collector, Base, Emitter
+V_bb 1 GND 2.985
+R1 1 B 100k
+R2 2 C 1k
+V_cc 2 GND 9.5
+
+*Operational Analysis
+.op
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set xbrushwidth = 2 
+print V(c)
+print I(V_cc)
+print I(V_cc)/I(V_bb)
+let gm = I(V_cc)/26m
+print gm
+print (I(V_cc)/I(V_bb))/gm
+.endc
+.end

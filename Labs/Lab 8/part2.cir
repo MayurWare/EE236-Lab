@@ -1,0 +1,29 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 8
+*BJT in CB Configuration
+.include BC547.txt               ;Including BJT model file
+
+*Netlist
+Q1 C B E bc547a             ;Defining the BJT Model Collector, Base, Emitter
+R1 1 C1 100
+Ie E E1 dc 1m
+V1 E1 GND dc 0
+V2 1 GND dc 0
+Vc C1 C dc 0
+Vb B GND dc 0
+
+*DC Analysis
+.dc V2 -2 10 0.1 Ie 0m 10m 1m
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set xbrushwidth = 2 
+let V = V(C) - V(B)
+plot I(Vc) vs V   
+plot I(Vc)/I(V1)  ;Base Transport Factor
+plot I(Vc)/I(Vb)  ;Beta
+plot I(V1)/I(Vb)  ;Reverse Beta        
+.endc
+.end

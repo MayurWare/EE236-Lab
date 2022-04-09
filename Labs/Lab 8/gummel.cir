@@ -1,0 +1,27 @@
+Mayur Ware | 19D070070
+*EE236 | Lab 8
+*Gummel Plot
+.include BC547.txt               ;Including BJT model file
+
+*Netlist
+Q1 C B GND bc547a             ;Defining the BJT Model Collector, Base, Emitter
+Vin In 0 5
+V1 1 In 5
+Rc 2 1 100
+Rb 3 In 470
+Vc 2 C 0
+Vb 3 B 0
+
+*DC Analysis
+.dc Vin 0.2 1.2 10m
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set xbrushwidth = 2 
+plot log(i(Vc)) vs V(3) log(abs(i(Vb))) vs V(3)
+let beta = log(i(Vc)) - log(abs(i(Vb)))
+plot beta vs log(i(Vc))
+.endc
+.end

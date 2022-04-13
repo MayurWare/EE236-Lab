@@ -1,0 +1,24 @@
+Mayur Ware | 19D070070
+*EE236 | Endsem | Q1 (b)
+*Temperature Dependence of NMOS
+*Including NMOS model file
+.include NMOSFET.txt
+
+*Netlist 
+M1 D G GND GND NMOSFET     ;Definining NMOS 
+V1 D1 D dc 0
+V2 D1 GND dc 3
+V3 G GND dc 3
+
+*DC Analysis
+.dc V2 0 3 3 temp 25 55 10
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set xbrushwidth = 2
+plot I(V1) vs V(D) ;Ic vs Vce plot
+.endc
+.end

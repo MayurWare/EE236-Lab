@@ -1,0 +1,25 @@
+Mayur Ware | 19D070070
+*EE236 | Endsem | Q2 (c)
+*NMOS Mobility and Power
+*Including NMOS model file
+.include NMOSFET.txt
+
+*Netlist
+M1 D G GND GND NMOSFET L=0.4u W=30u AS={2*30u*0.4u} PS={2*30u+4*0.4u} AD={2*30u*0.4u} PD={2*30u+4*0.4u}    ;Definining NMOS 
+V1 D1 D dc 0
+Vd D1 GND dc 0.3
+Vg G GND dc 0
+
+*DC Analysis
+.dc Vg 0.3 3.3 0.1 temp 25 125 50
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set color4 = orange
+set xbrushwidth = 2
+plot log(I(V1)) vs V(G) ;ID vs VGS plot
+.endc
+.end

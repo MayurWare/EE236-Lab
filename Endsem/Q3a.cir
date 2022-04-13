@@ -1,0 +1,25 @@
+Mayur Ware | 19D070070
+*EE236 | Endsem | Q3 (a)
+*Id vs Vds
+*Including NMOS model file
+.include NMOSFET.txt
+
+*Netlist
+M1 D G GND GND NMOSFET L=20u W=120u AS={2*120u*20u} PS={2*120u+4*20u} AD={2*120u*20u} PD={2*120u+4*20u}    ;Definining NMOS 
+V1 D1 D dc 0
+Vd D1 GND dc 0.3
+Vg G GND dc 1.5
+
+*DC Analysis
+.dc Vd 0 3 0.1
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+set color4 = orange
+set xbrushwidth = 2
+plot I(V1) vs V(D) ;ID vs VDS plot
+.endc
+.end

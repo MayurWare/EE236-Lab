@@ -1,0 +1,35 @@
+Mayur Ware | 19D070070
+*EE236 | Endsem | Q4
+*CMOS Inverter
+.include CMOS.txt                   ;Including CMOS model file
+
+*Netlist
+M1 1 In Out 1 cmosp L=0.4u W=30u AS=24p PS=61.6u AD=24p PD=61.6u
+*M1 1 In Out 1 cmosp L=0.4u W=60u AS=48p PS=121.6u AD=48p PD=121.6u
+*Defining the NMOS Model Drain, Gate, Source, Body
+M2 Out In GND GND cmosn L=0.4u W=60u AS=48p PS=121.6u AD=48p PD=121.6u
+*M2 Out In GND GND cmosn L=0.4u W=30u AS=24p PS=61.6u AD=24p PD=61.6u
+*Defining the PMOS Model Drain, Gate, Source, Body
+C1 Out GND 0.05p
+Vdd 1 GND dc 3.3
+Vin In GND pulse(0 3.3 0 20p 20p 4n 8n)
+
+*DC Analysis
+.dc Vin 0 5 0.01
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = violet
+*set color2 = blue ;1 Wp = 60 Wn = 30
+*set color2 = red ;2 Wp = 60 Wn = 60
+*set color2 = black ;3 Wp = 30 Wn = 60
+set xbrushwidth = 2 
+plot V(Out) vs V(In)             ;Voltage Transfer Characteristics
+.meas tran rise trig v(out) val=0.33 rise=1 targ v(out) val=2.97 rise=1
+.meas tran delay trig v(a) val=1.665 rise=2 targ v(out) val=1.665 fall=2
+.meas tran fall trig v(out) val=2.97 fall=1 targ v(out) val=0.33 fall=1
+print rise fall
+.endc
+.end
+

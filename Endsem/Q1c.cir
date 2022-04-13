@@ -1,0 +1,47 @@
+Mayur Ware | 19D070070
+*EE236 | Endsem | Q1 (c)
+*Turnoff time analysis
+*Including NMOS and BJT model files
+.include NMOSFET.txt
+.include bc547a.txt
+
+*Netlist
+Q1 C B GND bc547a      ;Defining BJT
+M1 D G GND GND NMOSFET ;Defining NMOS
+R1b C C1 1k
+R2b B B1 1k
+Vddb C1 GND dc 5
+
+R1m D D1 1k
+R2m G G1 1k
+Vddm D1 GND dc 5
+
+VIn B1 GND pulse(0 5 0 0 0 0.25u 0.5u)
+
+*Analysis
+.tran 0.01u 5u
+
+.control
+run
+set color0 = white
+set color1 = black
+set color2 = red
+set color3 = blue
+set color4 = green
+set color5 = orange
+plot V(B1), V(C)
+let Vmin = minimum(V(C))
+print Vmin
+meas tran tr trig v(C) val=1.1*Vmin rise=1 targ v(C) val=4.5 rise=1
+meas tran ts trig v(B1) val=4.5 fall=1 targ v(C) val=4.5 rise=1
+meas tran tf trig v(C) val=4.5 fall=2 targ v(C) val=1.1*Vmin fall=2
+let toff = ts + tr
+print toff
+*let Vmin = minimum(V(D))
+*plot V(D) V(G1)
+*meas tran fall trig v(D) val=1.1*Vmin rise=2 targ v(D) val=4.5 rise=2
+*meas tran strg when v(D)=4.5 rise=1
+*let turnoff = fall + strg - 0.5u
+*print turnoff
+.endc
+.end

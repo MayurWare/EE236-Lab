@@ -13,7 +13,7 @@ Vc 2 C 0
 Vb 3 B 0
 
 *DC Analysis
-.dc Vin 0.2 1.2 10m
+.dc Vin 0.2 0.8 10m
 .control
 run
 set color0 = white
@@ -22,6 +22,6 @@ set color2 = blue
 set xbrushwidth = 2 
 plot log(i(Vc)) vs V(3) log(abs(i(Vb))) vs V(3)
 let beta = log(i(Vc)) - log(abs(i(Vb)))
-plot beta vs log(i(Vc))
+plot beta vs i(Vc)
 .endc
 .end
